@@ -3,16 +3,16 @@ import './ProductDetail.css';
 
 class ProductDetail extends Component {
 
-    name = this.props.product.name;
-    description = this.props.product.description;
-    value = this.props.product.value;
-
     render() {
+        const { name } = this.props.product;
+        const { description } = this.props.product;
+        const { value } = this.props.product;
+
         return (
             <div className="product">
-                <h4>{this.name}</h4>
-                <p className="description">{this.description}</p>
-                <p className="value">R$ {this.value}</p>
+                <h4>{name}</h4>
+                <p className="description">{description}</p>
+                <p className="value">R$ {value}</p>
             </div>
         );
     }
