@@ -1,0 +1,44 @@
+.ProductDetails {
+    width: 100%;
+    height: 130px;
+    background-color: #EEE;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+}
+
+.ProductDetails>.row {
+    height: 100%;
+}
+
+.ProductDetails:not(:first-child) {
+    margin-top: 10px;
+}
+
+.product__img {
+    border-right: 1px solid #000;
+}
+
+.product__infos {
+    padding: 10px;
+    text-align: left;
+}
+
+.product__name {
+    font-size: 19px;
+}
+
+.product__description {
+}
+
+.product__value {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.pedir-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}

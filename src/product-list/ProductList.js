@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import ProductDetail from '../product-detail/ProductDetail';
+import ProductDetails from '../product-details/ProductDetails';
+import ProductForm from '../product-form/ProductForm';
 import './ProductList.css';
+import { Button } from 'reactstrap';
 
-class ProductList extends Component {
+export default class ProductList extends Component {
 
-    render() {
-        const products = [
+    state = {
+        products: [
             {
                 name: 'Pizza pequena',
                 description: '4 fatias',
@@ -21,33 +23,28 @@ class ProductList extends Component {
                 description: '8 fatias',
                 value: 30.0
             }
-        ];
+        ]
+    }
 
-        const productsDetails = products.map((product, index) => {
+    render() {
+
+        const productsDetails = this.state.products.map((product, index) => {
             return (
-                <ProductDetail key={index} product={product} />
+                <ProductDetails key={index} product={product} />
             );
         });
 
         return (
             <div className="ProductList">
-                <h3>Products:</h3>
+                <h3>Produtos:</h3>
+                <ProductForm />
                 <div>
                     {productsDetails}
                 </div>
-            </div>
-        );
-        /* return (
-            <div className="ProductList">
-                <h3>Products:</h3>
-                <div>
-                    <ProductDetail product={products[0]} />
-                    <ProductDetail product={products[1]} />
-                    <ProductDetail product={products[2]} />
+                <div className="fab">
+                    <Button color="primary" className="fab-btn">+</Button>
                 </div>
             </div>
-        ); */
+        );
     }
 }
-
-export default ProductList;
