@@ -26,6 +26,10 @@ export default class ProductList extends Component {
         ]
     }
 
+    handleSubmit = product => {
+        this.setState({ products: [...this.state.products, product] });
+    }
+
     render() {
 
         const productsDetails = this.state.products.map((product, index) => {
@@ -37,7 +41,7 @@ export default class ProductList extends Component {
         return (
             <div className="ProductList">
                 <h3>Produtos:</h3>
-                <ProductForm />
+                <ProductForm handleSubmit={this.handleSubmit} />
                 <div>
                     {productsDetails}
                 </div>
