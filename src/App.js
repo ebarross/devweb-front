@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Home from './home/Home';
+import Home from './Home/Home';
 
 export default class App extends Component {
   render() {

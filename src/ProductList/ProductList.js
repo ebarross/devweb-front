@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import ProductDetails from '../product-details/ProductDetails';
-import ProductForm from '../product-form/ProductForm';
+import ProductDetails from '../ProductDetails/ProductDetails';
+import ProductForm from '../ProductForm/ProductForm';
 import './ProductList.css';
-import { Button } from 'reactstrap';
 
 export default class ProductList extends Component {
 
@@ -31,7 +30,6 @@ export default class ProductList extends Component {
     }
 
     render() {
-
         const productsDetails = this.state.products.map((product, index) => {
             return (
                 <ProductDetails key={index} product={product} />
@@ -44,9 +42,6 @@ export default class ProductList extends Component {
                 <ProductForm handleSubmit={this.handleSubmit} />
                 <div>
                     {productsDetails}
-                </div>
-                <div className="fab">
-                    <Button color="primary" className="fab-btn">+</Button>
                 </div>
             </div>
         );
