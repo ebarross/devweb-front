@@ -3,26 +3,22 @@ import ProductDetails from '../ProductDetails/ProductDetails';
 import ProductForm from '../ProductForm/ProductForm';
 import './ProductList.css';
 
+const URL = 'http://localhost:8080/product';
+
 export default class ProductList extends Component {
 
-    state = {
-        products: [
-            {
-                name: 'Pizza pequena',
-                description: '4 fatias',
-                value: 18.0
-            },
-            {
-                name: 'Pizza média',
-                description: '6 fatias',
-                value: 25.0
-            },
-            {
-                name: 'Pizza grande',
-                description: '8 fatias',
-                value: 30.0
-            }
-        ]
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            products: []
+        };
+    }
+
+    componentDidMount() {
+        fetch(URL)
+            .then(response => response.json())
+            .then(data => this.setState({ products: data }));
     }
 
     handleSubmit = product => {
@@ -30,7 +26,8 @@ export default class ProductList extends Component {
     }
 
     render() {
-        const productsDetails = this.state.products.map((product, index) => {
+        const { products } = this.state;
+        const productsDetails = products.map((product, index) => {
             return (
                 <ProductDetails key={index} product={product} />
             );
