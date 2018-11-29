@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ProductDetails from '../ProductDetails/ProductDetails';
 import ProductForm from '../ProductForm/ProductForm';
 import './ProductList.css';
+import axios from 'axios';
 
 const URL = 'http://localhost:8080/product';
 
@@ -22,7 +23,15 @@ export default class ProductList extends Component {
     }
 
     handleSubmit = product => {
-        this.setState({ products: [...this.state.products, product] });
+        axios.post(URL, {
+            name: product.name,
+            description: product.description,
+            value: product.value
+        }).then(response => {
+            this.setState({ products: [...this.state.products, response.data] });
+        }).catch(error => {
+            alert('Produto inválido, tente novamente.');
+        });
     }
 
     render() {
