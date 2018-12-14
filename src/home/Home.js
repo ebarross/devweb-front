@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ProductList from '../ProductList/ProductList';
+import ProductList from '../product-list/ProductList';
 import { Container } from 'reactstrap';
-import NavBar from '../NavBar/NavBar';
+import NavBar from '../navbar/NavBar';
 import './Home.css';
 
 export default class Home extends Component {

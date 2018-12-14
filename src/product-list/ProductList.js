@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ProductDetails from '../ProductDetails/ProductDetails';
-import ProductForm from '../ProductForm/ProductForm';
+import ProductDetails from '../product-details/ProductDetails';
+import ProductForm from '../product-form/ProductForm';
 import './ProductList.css';
 import axios from 'axios';
 
@@ -30,7 +30,8 @@ export default class ProductList extends Component {
         }).then(response => {
             this.setState({ products: [...this.state.products, response.data] });
         }).catch(error => {
-            alert('Produto inválido, tente novamente.');
+            // alert('Produto inválido, tente novamente.');
+            alert(`Erro: ${error}`);
         });
     }
 
