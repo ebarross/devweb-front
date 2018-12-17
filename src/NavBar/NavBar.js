@@ -9,6 +9,8 @@ import {
     NavLink
 } from 'reactstrap';
 import './NavBar.css';
+import { logout } from '../services/auth';
+import { Link } from 'react-router-dom';
 
 export default class NavBar extends Component {
     constructor(props) {
@@ -24,6 +26,10 @@ export default class NavBar extends Component {
         this.setState({
             isOpen: !this.state.isOpen
         });
+    }
+
+    handleLogout() {
+        logout();
     }
 
     render() {
@@ -44,7 +50,8 @@ export default class NavBar extends Component {
                                 <NavLink href="/account">Conta</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/logout">Sair</NavLink>
+                                <NavLink href="/login" onClick={this.handleLogout}>Sair</NavLink>
+                                {/* <NavLink >Sair</NavLink> */}
                             </NavItem>
                         </Nav>
                     </Collapse>

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './Login.css';
 import { Form, FormGroup, Input, Button } from 'reactstrap';
 import axios from 'axios';
+import API from '../services/api';
+import { login } from '../services/auth';
 
 const URL = 'http://localhost:8080/auth';
 
@@ -23,10 +25,22 @@ export default class Login extends Component {
         this.setState({ [name]: value });
     }
 
-    onSubmit = () => {
+    onSubmit = async e => {
         // logar
-        console.log(this.state);
-        axios.post(URL, {
+        e.preventDefault();
+        const { email, password } = this.state;
+        if (!email || !password) {
+            alert('Preencha email e senha');
+        } else {
+            try {
+                const response = await API.post('/auth', { email, password });
+                login(response.data.token);
+                this.props.history.push("/home");
+            } catch (error) {
+                alert("Email ou senha incorretos.");
+            }
+        }
+        /* API.post('/auth', {
             email: this.state.email,
             password: this.state.password
         }
@@ -35,7 +49,7 @@ export default class Login extends Component {
         }).catch(error => {
             console.log(error);
         });
-        this.setState(this.initialState);
+        this.setState(this.initialState); */
     }
 
     render() {
@@ -43,7 +57,7 @@ export default class Login extends Component {
             <div className="Login">
                 <div className="login-container">
                     <h3>Login</h3>
-                    <Form>
+                    <Form onSubmit={this.onSubmit}>
                         <FormGroup>
                             <Input type="email" placeholder="Email" name="email" onChange={this.onChange} required />
                         </FormGroup>
@@ -51,7 +65,7 @@ export default class Login extends Component {
                             <Input type="password" placeholder="Senha" name="password" onChange={this.onChange} required />
                         </FormGroup>
                         <FormGroup>
-                            <Button color="primary" onClick={this.onSubmit}>Entrar</Button>
+                            <Button color="primary">Entrar</Button>
                         </FormGroup>
                     </Form>
                 </div>

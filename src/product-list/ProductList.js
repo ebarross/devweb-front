@@ -3,6 +3,7 @@ import ProductDetails from '../product-details/ProductDetails';
 import ProductForm from '../product-form/ProductForm';
 import './ProductList.css';
 import axios from 'axios';
+import API from '../services/api';
 
 const URL = 'http://localhost:8080/product';
 
@@ -17,13 +18,29 @@ export default class ProductList extends Component {
     }
 
     componentDidMount() {
-        fetch(URL)
+        API.get('/product').then(data => {
+            this.setState({ products: data.data });
+        }).catch(error => {
+            console.log(error);
+        });
+        /* fetch(URL)
             .then(response => response.json())
-            .then(data => this.setState({ products: data }));
+            .then(data => this.setState({ products: data })); */
     }
 
     handleSubmit = product => {
-        axios.post(URL, {
+        API.post('/product', {
+            name: product.name,
+            description: product.description,
+            value: product.value
+        }).then(response => {
+            this.setState({ products: [...this.state.products, response.data] });
+            alert('Produto adicionado com sucesso!');
+        }).catch(error => {
+            // alert('Produto inválido, tente novamente.');
+            alert(`Erro: ${error}`);
+        });
+        /* axios.post(URL, {
             name: product.name,
             description: product.description,
             value: product.value
@@ -32,7 +49,7 @@ export default class ProductList extends Component {
         }).catch(error => {
             // alert('Produto inválido, tente novamente.');
             alert(`Erro: ${error}`);
-        });
+        }); */
     }
 
     render() {
